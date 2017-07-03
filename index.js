@@ -27,6 +27,6 @@ app.get('/webhook/', function (req, res) {
 })
 
 // Spin up the server
-app.listen(80, function() {
+app.listen(process.env.PORT, function() {
 	console.log('running on port', app.get('port'));
 })
