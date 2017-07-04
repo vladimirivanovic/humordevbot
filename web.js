@@ -103,7 +103,9 @@ app.post('/ai', (req, res) => {
     request.get(restUrl, (err, response, body) => {
       if (!err && response.statusCode == 200) {
         let json = JSON.parse(body);
-        let msg = json.weather[0].description + ' and the temperature is ' + json.main.temp + ' ℉';
+        let tempC = ~~(json.main.temp - 273.15);
+        console.log('*** temp ***' + tempC);
+        let msg = json.weather[0].description + ' and the temperature is ' + tempC + ' ℉';
         return res.json({
           speech: msg,
           displayText: msg,
