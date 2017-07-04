@@ -1,7 +1,7 @@
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
-const apiaiApp = require('apiai')(process.env.APIAI_ACCESS_TOKEN);
+const apiaiApp = require('apiai')(process.env.APIAI_ACCESS_TOKEN || "testaitoken");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -67,7 +67,7 @@ function sendMessage(event) {
 
     request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token: process.env.FB_PAGE_ACCESS_TOKEN},
+      qs: {access_token: process.env.FB_PAGE_ACCESS_TOKEN || 'testtolen'},
       method: 'POST',
       json: {
         recipient: {id: sender},
@@ -88,8 +88,9 @@ function sendMessage(event) {
   apiai.end();
 }
 
+
 app.post('/ai', (req, res) => {
-  if (req.body.result.action === 'vreme') {
+  if (req.body.result.action === 'weather') {
     let city = req.body.result.parameters['geo-city'];
     let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+process.env.WEATHER_API_KEY+'&q='+city;
 
@@ -106,5 +107,5 @@ app.post('/ai', (req, res) => {
           status: {
             code: 400,
             errorType: 'I failed to look up the city name.'}});
-      }})
-  }
+      }});
+  }})
