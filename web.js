@@ -90,7 +90,7 @@ function sendMessage(event) {
 
 
 app.post('/ai', (req, res) => {
-  if (req.body.result.action === 'weather') {
+  if (req.body.result.action === 'vreme') {
     let city = req.body.result.parameters['geo-city'];
     let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+process.env.WEATHER_API_KEY+'&q='+city;
 
