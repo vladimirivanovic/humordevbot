@@ -108,4 +108,4 @@ app.post('/ai', (req, res) => {
             code: 400,
             errorType: 'I failed to look up the city name.'}});
       }});
-  }})
+  }});
