@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "body-parser": "1.17.2",
-    "express": "4.15.3"
+    "express": "4.15.3",
+    "request": "^2.81.0"
   },
   "engines": {
     "node": "0.8.x",
