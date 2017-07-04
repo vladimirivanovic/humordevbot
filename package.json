@@ -1,8 +1,14 @@
 {
+  "name": "node-example",
+  "version": "0.0.1",
   "dependencies": {
-    "botbuilder": "^3.5.4",
-    "restify": "^4.3.0",
     "body-parser": "1.17.2",
-    "express": "4.15.3"
+    "express": "4.15.3",
+    "botbuilder": "^3.5.4",
+    "restify": "^4.3.0"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
   }
 }
