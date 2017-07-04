@@ -43,7 +43,7 @@ function sendMessage(event) {
     method: 'POST',
     json: {
       recipient: {id: sender},
-      message: {text: 'vlada'}
+      message: {text:text}
     }
   }, function (error, response) {
     if (error) {
