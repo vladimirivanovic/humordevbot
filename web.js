@@ -1,6 +1,7 @@
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
+const apiaiApp = require('apiai')(process.env.APIAI_ACCESS_TOKEN);
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +33,7 @@ app.post('/webhook', function (req, res) {
     res.status(200).end();
   }
 });
-
+/* papagaj funkcija koja ponavlja
 function sendMessage(event) {
   let sender = event.sender.id;
   let text = event.message.text;
@@ -52,4 +53,37 @@ function sendMessage(event) {
         console.log('Error: ', response.body.error);
     }
   });
+}*/
+function sendMessage(event) {
+  let sender = event.sender.id;
+  let text = event.message.text;
+
+  let apiai = apiaiApp.textRequest(text, {
+    sessionId: 'Humordevbotsession' // use any arbitrary id
+  });
+
+  apiai.on('response', (response) => {
+  let aiText = response.result.fulfillment.speech;
+
+    request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: process.env.FB_PAGE_ACCESS_TOKEN},
+      method: 'POST',
+      json: {
+        recipient: {id: sender},
+        message: {text: aiText}
+      }
+    }, (error, response) => {
+      if (error) {
+          console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error);
+      }
+    });  });
+
+  apiai.on('error', (error) => {
+    console.log(error);
+  });
+
+  apiai.end();
 }
