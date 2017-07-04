@@ -101,7 +101,7 @@ app.post('/ai', (req, res) => {
         return res.json({
           speech: msg,
           displayText: msg,
-          source: 'weather'});
+          source: 'vreme'});
       } else {
         return res.status(400).json({
           status: {
