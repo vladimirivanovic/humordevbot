@@ -62,7 +62,7 @@ function sendMessage(event) {
     sessionId: 'Humordevbotsession' // use any arbitrary id
   });
 
-  apiai.on('response', (response) => {
+  apiai.on('response', function(response)  {
   let aiText = response.result.fulfillment.speech;
 
     request({
