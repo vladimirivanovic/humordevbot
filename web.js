@@ -57,6 +57,8 @@ function sendMessage(event) {
 function sendMessage(event) {
   let sender = event.sender.id;
   let text = event.message.text;
+  
+   console.log('*** SeNdMessage  for api.ai query ***');
 
   let apiai = apiaiApp.textRequest(text, {
     sessionId: 'Humordevbotsession' // use any arbitrary id
@@ -90,6 +92,10 @@ function sendMessage(event) {
 
 
 app.post('/ai', (req, res) => {
+
+  
+   console.log('*** SeNdMessage  for ai post query ***');
+
   if (req.body.result.action === 'vreme') {
     let city = req.body.result.parameters['geo-city'];
     let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+process.env.WEATHER_API_KEY+'&q='+city;
